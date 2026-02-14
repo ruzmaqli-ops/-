@@ -80,12 +80,10 @@
             <p>forgive me because I still always try and try at everything ಥ⁠_⁠ಥ</p>
             <p>sayaaanggg mwahh</p>
             <p>🎁 <b>Gift: A Coffee Date (⁠~⁠￣⁠³⁠￣⁠)⁠~!</b></p>
-
         </div>
     </div>
 
-    <iframe id="music-player" width="0" height="0" src="https://www.youtube.com/embed/uQfO_p3T9K8?enablejsapi=1"
-frameborder="0"></iframe>
+    <iframe id="music-player" width="0" height="0" src="https://www.youtube.com/embed/f_Y8I9Z7U-0?enablejsapi=1&autoplay=1&mute=1" frameborder="0" allow="autoplay"></iframe>
 
     <script>
         let isOpened = false;
@@ -102,9 +100,9 @@ frameborder="0"></iframe>
             // Tampilkan Pesan
             document.getElementById('message').style.display = 'block';
 
-            //uQfO_p3T9K8 Putar Musik lewat API YouTube
+            // Nyalakan Musik (Unmute dan Play)
             const player = document.getElementById('music-player');
-            player.src += "&autoplay=1";
+            player.src = player.src.replace("mute=1", "mute=0");
 
             // Efek Hati Berjatuhan secara berkala
             setInterval(createHeart, 300);
@@ -113,7 +111,9 @@ frameborder="0"></iframe>
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.innerHTML = ['🌸', '😦', '💌', '😚', '💗','😛','🫂','😻'][Math.floor(Math.random() * 5)];
+            // Menambah variasi emoji yang jatuh
+            const emojis = ['🌸', '😦', '💌', '😚', '💗','😛','🫂','😻', '💘', '😼'];
+            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
             heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
