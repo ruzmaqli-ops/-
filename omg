@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM_BIRTHDAY_INIT</title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #00ff41;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .window {
+            border: 2px solid #00ff41;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            background: rgba(0, 20, 0, 0.9);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            position: relative;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header {
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h1 { font-size: 1.5rem; margin: 0; }
+        p { font-size: 1.2rem; line-height: 1.6; }
+
+        .cursor { display: inline-block; width: 10px; height: 20px; background: #00ff41; animation: blink 1s infinite; }
+
+        button {
+            background: transparent;
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-family: inherit;
+        }
+
+        button:hover { background: #00ff41; color: #000; }
+
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="window">
+        <div class="header">
+            <span>SYSTEM_ALERT.exe</span>
+            <span>[X]</span>
+        </div>
+        
+        <div id="text-container">
+            <h1>Memuat Data...</h1>
+            <p id="typed-text"></p>
+        </div>
+
+        <button id="playBtn" onclick="startExperience()">JALANKAN UCAPAN</button>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="lagu_kamu.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // --- EDIT BAGIAN INI UNTUK CUSTOM PESAN ---
+        const message = "Halo [Nama Teman]! \n\nSistem mendeteksi bahwa hari ini adalah hari spesialmu. \nSelamat ulang tahun yang ke-XX! \nSemoga error di hidupmu berkurang dan bahagia terus bertambah. \n\nStay Awesome!";
+        // ------------------------------------------
+
+        const textElement = document.getElementById('typed-text');
+        const playBtn = document.getElementById('playBtn');
+        const music = document.getElementById('bgMusic');
+
+        function typeWriter(text, i) {
+            if (i < text.length) {
+                textElement.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
+                setTimeout(() => typeWriter(text, i + 1), 50);
+            }
+        }
+
+        function startExperience() {
+            playBtn.style.display = 'none';
+            document.querySelector('h1').innerText = "BIRTHDAY_FOUND.exe";
+            music.play().catch(e => console.log("User harus berinteraksi dulu"));
+            typeWriter(message, 0);
+        }
+    </script>
+</body>
+</html>
